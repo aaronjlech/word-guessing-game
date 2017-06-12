@@ -28,33 +28,41 @@ var chosenWord = chooseRandomWord(commonWords).split('');
 var maskedWord = chosenWord.map(l =>  '#');
 var counter = 10;
 var triedCharacters = [];
+
+// *****DOM SELECTORS*****
+//guessForm === <form id="guesser"></form>
 var guessForm = document.querySelector('#guesser');
+//wordDispalay === <span id='word'></span>
 var wordDisplay = document.querySelector("#word");
+// showErr = <span id="show-error"></span>
 var showErr = document.querySelector('#show-error');
 var showAmount = document.querySelector('#amount-left');
 var showletters = document.querySelector('#guessed');
+// ***** END DOM SELECTORS *******
+
 wordDisplay.innerHTML = maskedWord.join('');
-// Create a function that accepts a single character argument
 var checkForCharacter = function(char) {
    // console.log(chosenWord.indexOf(char), chosenWord);
+   console.log(maskedWord.indexOf(char));
+   if(triedCharacters.indexOf(char) !== -1){
+      console.log('already guessed');
+      return;
+   }
    counter -= 1;
    //if the character isn't in the word it will return -1
    //if the character is in the word it will return the index [0 - (length -1)]
    let charIndex = chosenWord.indexOf(char);
+
+   triedCharacters.push(char);
+   showletters.innerHTML = triedCharacters.join(', ');
+   showAmount.innerHTML = counter
    if(charIndex !== -1){
       maskedWord[charIndex] = char;
       wordDisplay.innerHTML = maskedWord.join('');
+   }
+   if(counter === 0){
 
    }
-   showletters.innerHTML += char + ', ';
-   showAmount.innerHTML = counter
-  // The function should check the `chosenWord` for that character
-  // The function should return true if the character is in the given word
-  // The function should return false if the character is not in the given word
-  // The function should only be able to return true or false a certain number of times (the number stored in the `counter` variable)
-  // The function should store and console.log every letter that has been passed to this function in the `triedCharacters` array
-  // The function should store and console.log every letter in `chosenWord` that has been passed to this function in the `correctCharacters` array
-  // If every letter in `chosenWord` word has been passed to this function, console.log "you guessed it"
 }
 guessForm.addEventListener('submit', function(evt){
    evt.preventDefault();
@@ -62,8 +70,6 @@ guessForm.addEventListener('submit', function(evt){
    var inputVal = evt.target.children[0].value;
    if(inputVal.length !== 1 || !isNaN(parseInt(inputVal)) ){
       showErr.innerHTML = "Invalid input!, must be a single LETTER!";
-   }else if(counter === 0){
-      console.log('you lose');
    }else {
       checkForCharacter(inputVal)
       evt.target.children[0].value = '';
