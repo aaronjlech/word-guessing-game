@@ -1,5 +1,5 @@
 
-
+console.log('wahadsf');
 
 
 // Here are the 100 most popular words in English, as totally
@@ -36,8 +36,10 @@ wordDisplay.innerHTML = maskedWord.join('');
 
 // Create a function that accepts a single character argument
 var checkForCharacter = function(char) {
-   console.log(chosenWord.indexOf(char), chosenWord);
+   // console.log(chosenWord.indexOf(char), chosenWord);
    counter -= 1;
+   //if the character isn't in the word it will return -1
+   //if the character is in the word it will return the index [0 - (length -1)]
    let charIndex = chosenWord.indexOf(char);
    if(charIndex !== -1){
       maskedWord[charIndex] = char;
@@ -62,59 +64,8 @@ guessForm.addEventListener('submit', function(evt){
       showErr.innerHTML = "Invalid input!, must be a single LETTER!"
    }else {
       checkForCharacter(inputVal)
+      evt.target.children[0].value = '';
    }
 
 
 })
-
-
-
-// X Marks the Spot - Part 1
-
-// Write a function called returnRandomLetter that will return a random letter of the alphabet lower or uppercase when it is called.
-
-// HINT: If you aren't familiar with character codes check out http://www.asciitable.com/ and notice that the all capital letters are associated with a number between 65 and 90. All lower case letters are associated with a number between 97 and 122.
-function returnRandomLetter(){
-
-  return Math.floor(Math.random()*(90-65+1)+65);
-
-}
-
-// X Marks the Spot - Part 2
-
-// Create a global variable called "searchArray" and set it equal to an empty array.
-
-// Create a global variable called "maxX" and set it equal to 10.
-
-// Create a global variable called "maxY" and set it equal to 10.
-
-// Write a function called "generateArray" that will place a two dimensional (an Array of Arrays) and in each cell of the array place a random letter using your returnRandomLetter function.
-
-
-// X Marks the Spot - Part 3
-
-// Create a global variable called "havePlacedX" and set it equal to false. This variable will track whether or not a capital letter X has been placed in search Array.
-
-// Modify your returnRandomLetter function so that when a capital X is generated havePlacedX is set to true.
-
-// Modify your returnRandomLetter function so that if havePlacedX is true and another capital X is generated again returnRandomLetter returns a different letter insuring ultimately that searchArray
-
-
-// X Marks the Spot - Part 4
-
-// Write a function called xMarksTheSpot that takes in one parameter of our searchArray variable.
-// The function "searches" searchArray for the capital letter X finds its "position" So in this simplified 3 x 3 two dimensional Array the position of X is 1, 1
-
-// ["P", "z", "m"]
-// ["l", "X", "k"]
-// ["C", "O", "t"]
-
-// xMarksTheSpot should log to the console:
-
-// The character 'X' is located in the array cell ( xPostion , yPosition )
-
-// or if a capital X is not found anywhere in the Array of Arrays
-
-// The character 'X' is not in the array.
-
-// HINT: Make sure you're familiar with the indexOf method in Array variables
