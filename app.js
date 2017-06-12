@@ -46,8 +46,6 @@ var checkForCharacter = function(char) {
       wordDisplay.innerHTML = maskedWord.join('');
 
    }
-
-
   // The function should check the `chosenWord` for that character
   // The function should return true if the character is in the given word
   // The function should return false if the character is not in the given word
@@ -61,11 +59,9 @@ guessForm.addEventListener('submit', function(evt){
    showErr.innerHTML = "";
    var inputVal = evt.target.children[0].value;
    if(inputVal.length !== 1 || !isNaN(parseInt(inputVal)) ){
-      showErr.innerHTML = "Invalid input!, must be a single LETTER!"
+      showErr.innerHTML = "Invalid input!, must be a single LETTER!";
    }else {
       checkForCharacter(inputVal)
       evt.target.children[0].value = '';
    }
-
-
 })
