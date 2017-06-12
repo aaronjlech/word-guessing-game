@@ -44,7 +44,6 @@ var checkForCharacter = function(char) {
    if(charIndex !== -1){
       maskedWord[charIndex] = char;
       wordDisplay.innerHTML = maskedWord.join('');
-
    }
   // The function should check the `chosenWord` for that character
   // The function should return true if the character is in the given word
@@ -61,7 +60,7 @@ guessForm.addEventListener('submit', function(evt){
    if(inputVal.length !== 1 || !isNaN(parseInt(inputVal)) ){
       showErr.innerHTML = "Invalid input!, must be a single LETTER!";
    }else {
-      checkForCharacter(inputVal)
+      checkForCharacter(inputVal);
       evt.target.children[0].value = '';
    }
-})
+});
