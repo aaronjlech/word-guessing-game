@@ -35,9 +35,15 @@ var showErr = document.querySelector('#show-error');
 wordDisplay.innerHTML = maskedWord.join('');
 
 // Create a function that accepts a single character argument
-var checkForCharacter = function(character) {
+var checkForCharacter = function(char) {
+   console.log(chosenWord.indexOf(char), chosenWord);
+   counter -= 1;
+   let charIndex = chosenWord.indexOf(char);
+   if(charIndex !== -1){
+      maskedWord[charIndex] = char;
+      wordDisplay.innerHTML = maskedWord.join('');
 
-
+   }
 
 
   // The function should check the `chosenWord` for that character
@@ -52,11 +58,10 @@ guessForm.addEventListener('submit', function(evt){
    evt.preventDefault();
    showErr.innerHTML = "";
    var inputVal = evt.target.children[0].value;
-   console.log(parseInt(inputVal));
    if(inputVal.length !== 1 || !isNaN(parseInt(inputVal)) ){
       showErr.innerHTML = "Invalid input!, must be a single LETTER!"
    }else {
-      
+      checkForCharacter(inputVal)
    }
 
 
