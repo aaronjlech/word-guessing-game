@@ -28,12 +28,12 @@ var chosenWord = chooseRandomWord(commonWords).split('');
 var maskedWord = chosenWord.map(l =>  '#');
 var counter = 10;
 var triedCharacters = [];
-var correctCharacters = [];
 var guessForm = document.querySelector('#guesser');
 var wordDisplay = document.querySelector("#word");
 var showErr = document.querySelector('#show-error');
+var showAmount = document.querySelector('#amount-left');
+var showletters = document.querySelector('#guessed');
 wordDisplay.innerHTML = maskedWord.join('');
-
 // Create a function that accepts a single character argument
 var checkForCharacter = function(char) {
    // console.log(chosenWord.indexOf(char), chosenWord);
@@ -46,6 +46,8 @@ var checkForCharacter = function(char) {
       wordDisplay.innerHTML = maskedWord.join('');
 
    }
+   showletters.innerHTML += char + ', ';
+   showAmount.innerHTML = counter
   // The function should check the `chosenWord` for that character
   // The function should return true if the character is in the given word
   // The function should return false if the character is not in the given word
@@ -60,8 +62,13 @@ guessForm.addEventListener('submit', function(evt){
    var inputVal = evt.target.children[0].value;
    if(inputVal.length !== 1 || !isNaN(parseInt(inputVal)) ){
       showErr.innerHTML = "Invalid input!, must be a single LETTER!";
+   }else if(counter === 0){
+      console.log('you lose');
    }else {
       checkForCharacter(inputVal)
       evt.target.children[0].value = '';
+      if(chosenWord.join('') === wordDisplay.innerHTML){
+         console.log('you win')
+      }
    }
 })
